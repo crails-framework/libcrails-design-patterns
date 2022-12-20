@@ -1,0 +1,6 @@
+$out_root/
+{
+  include libcrails-design-patterns/
+}
+
+export $out_root/libcrails-design-patterns/$import.target

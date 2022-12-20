@@ -1,0 +1,7 @@
+project = libcrails-design-patterns
+
+using version
+using config
+using test
+using install
+using dist
