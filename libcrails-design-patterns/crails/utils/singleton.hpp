@@ -13,6 +13,7 @@ private:\
 public:\
   typedef SingletonImplementation<type, from_type> singleton;\
 private:\
+  friend class Singleton<from_type>; \
   friend class SingletonImplementation<type, from_type>;
 
 template<typename TYPE>
