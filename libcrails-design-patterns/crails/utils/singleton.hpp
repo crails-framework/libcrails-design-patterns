@@ -2,12 +2,14 @@
 # define SINGLETON_HPP
 
 # include <crails/utils/backtrace.hpp>
+# include <string>
 
 # define SINGLETON(type) \
 public:\
   typedef Singleton<type> singleton; \
 private:\
-  friend class Singleton<type>;
+  friend class Singleton<type>; \
+  static constexpr const char* _singleton_typename = #type;
 
 # define SINGLETON_IMPLEMENTATION(type, from_type) \
 public:\
@@ -26,7 +28,7 @@ public:
     if (!(ptr))
       ptr = new TYPE(args...);
     else
-      throw boost_ext::runtime_error("Was already initialized");
+      throw boost_ext::runtime_error(std::string("Singleton ") + TYPE::_singleton_typename + " was already initialized");
   }
 
   template<typename IMPLEMENTATION, typename... Args>
@@ -35,7 +37,7 @@ public:
     if (!(ptr))
       ptr = new IMPLEMENTATION(args...);
     else
-      throw boost_ext::runtime_error("Was already initialized");
+      throw boost_ext::runtime_error(std::string("Singleton ") + TYPE::_singleton_typename + " was already initialized");
   }
 
   static void finalize(void)
@@ -52,7 +54,7 @@ public:
   static TYPE&  require(void)
   {
     if (!ptr)
-      throw boost_ext::runtime_error("Singleton is not initialized");
+      throw boost_ext::runtime_error(std::string("Singleton ") + TYPE::_singleton_typename + " is not initialized");
     return *ptr;
   }
 
