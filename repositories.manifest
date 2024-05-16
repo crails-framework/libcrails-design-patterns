@@ -1,2 +1,3 @@
 : 1
-summary: libcrails-design-patterns project repository
+role: prerequisite
+location: https://github.com/crails-framework/libbacktrace.git#master
