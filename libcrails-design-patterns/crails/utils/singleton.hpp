@@ -99,6 +99,8 @@ struct SingletonInstantiator
   }
 
   TYPE* operator->() const { return TYPE::singleton::get(); }
+
+  TYPE& operator*() const { return *(reinterpret_cast<TYPE*>(TYPE::singleton::get())); }
 };
 
 template<typename TYPE> TYPE* Singleton<TYPE>::ptr = 0;
